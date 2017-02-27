@@ -2,5 +2,5 @@
  * Created by jonlazarini on 27/02/17.
  */
 module.exports = {
-    API_KEY: "a2a4449c0eb1630c9e6d4b98a19c50bd"
+    API_KEY: "672aa588c2a9ed1c903cd291e545dcac"
 };

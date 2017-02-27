@@ -3,7 +3,7 @@
  */
 import { API_KEY } from '../config';
 
-const url =`http://api.openweathermap.org/data/2.5/`;
+const url =`http://api.openweathermap.org/data/2.5/forecast/`;
 const units = 'metric';
 const cnt = 7;
 
@@ -18,5 +18,4 @@ const getWeather = (city, type) => {
 };
 
 
-
-export const weatherCity = (city) => getWeather(city, 'weather');
+export const weatherCity = (city) => getWeather(city, 'daily');
