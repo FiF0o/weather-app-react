@@ -68,45 +68,47 @@ class Weather extends React.Component {
     render() {
 
         if (this.state.err) {
-            return <div> {this.state.errMessage.toString()} </div>
+            return (
+                <div className="pure-u-1-1">
+                    <h2>{this.state.errMessage}</h2>
+                </div>
+            )
         }
 
         const list = this.state.list.map((item, index) =>
-            <li key={index}>
-                <ul>
-                    <li key={`head-${index}`}>
-                        <p>{ getDayFromUnixTimeStamp(item.dt) }</p>
-                        <p>{ Math.round(item.temp.day * 10) / 10 }</p>
-                    </li>
-                    {
-                        item.weather.map((t, index2) =>
-                            <li key={`sub-${index}-${index2}`} >
-                                <span>{ t.main }</span>
-                                <span>{ t.description }</span>
-                            </li>
-                        )
-                    }
-                </ul>
+            <li key={`head-${index}`}>
+                <span>
+                    <span>{ getDayFromUnixTimeStamp(item.dt) }</span>
+                    <span>{ Math.round(item.temp.day * 10) / 10 }</span>
+                </span>
+                  {
+                    item.weather.map((t, index2) =>
+                      <span key={`sub-${index}-${index2}`} >
+                          <span>{ t.main }</span>
+                          <span>{ t.description }</span>
+                      </span>
+                    )
+                  }
             </li>
         )
 
         return(
-            <div>
-                <form onSubmit={this._handleSubmit}>
-                    <label htmlFor="weather">
-                        <input id="weather" type="text" value={this.state.value} onChange={this._handleChange} />
-
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-                <h1>Weather</h1>
-                <div>
+            <div className="pure-u-1-1">
+                <div className="l-box">
+                    <form className="pure-form" onSubmit={this._handleSubmit}>
+                        <label htmlFor="weather">
+                            <input className="pure-input-2-3" id="weather" type="text" value={this.state.value} onChange={this._handleChange} placeholder="search a city weather..."/>
+                        </label>
+                        <input className="pure-input-1-3" type="submit" value="Submit"/>
+                    </form>
+                </div>
+                <div className="l-box">
                     <ul>
                         {
                             !this.state.loaded ?
-                            <div>fetching data...</div>
-                            :
-                            <div>{ list }</div>
+                                <div className="loader">fetching data...</div>
+                                :
+                                <div>{ list }</div>
                         }
                     </ul>
                 </div>

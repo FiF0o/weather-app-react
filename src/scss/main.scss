@@ -1,0 +1,85 @@
+//@import '~purecss-sass/vendor/assets/stylesheets/purecss';
+@import "../../node_modules/purecss-sass/vendor/assets/stylesheets/purecss";
+
+body {
+  text-align: center;
+}
+
+.l-box {
+  padding: 1em;
+}
+
+.pure-g {
+  > div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+li {
+  box-sizing: border-box;
+  width: 100%;
+  // align middle text
+  display: table;
+  //height: 88px;
+  //line-height:88px;
+  //
+  padding: 1em;
+  margin: 2em 0;
+  list-style: none;
+  border-bottom: 1px solid red;
+
+  &:last-child {
+    border: none;
+  }
+
+  > span {
+    box-sizing: border-box;
+    padding: 1em;
+    // align middle text
+    display: table-cell;
+    vertical-align: middle;
+
+    // left block
+    &:first-child {
+      width: 50%;
+      float: left;
+      text-align: left;
+      color: red;
+    }
+
+    // right block
+    &:last-child {
+      width: 50%;
+      float: right;
+      text-align: right;
+      color: blue;
+    }
+
+    // adds padding
+    >span {
+      padding: 1em;
+
+      &:first-child {
+        //padding: 1em;
+        color: green;
+      }
+
+      &:last-child {
+        color: red;
+      }
+    }
+
+  }
+}
+
+.loader {
+
+  &._incomplete {
+
+  }
+  &._done {
+
+  }
+}
