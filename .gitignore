@@ -18,6 +18,7 @@ yarn-error.log*
 .idea/workspace.xml
 .idea
 src/config
+*.map
 
 bower_components
 

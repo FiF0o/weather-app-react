@@ -20,6 +20,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build:css": "./node_modules/.bin/node-sass --source-map true ./src/scss/main.scss -o ./public",
-    "style:watch": "npm run build:css -- -wr"
+    "style:watch": "npm run build:css -- -wr",
+    "assets": "cp -R ./src/assets/ ./public/assets/",
+    "//": "cd public/ && mkdir assets && cp -R ../src/assets/ ../public/assets/",
+    "//": "rm -rf ./public"
   }
 }

@@ -4,13 +4,17 @@
 import React, { PropTypes } from 'react';
 import { weatherCity } from '../api/weather';
 import { getDayFromUnixTimeStamp } from '../utils'
+import { dayStyle, cityStyle, countryStyle, showWeather} from '../styles/style'
 
 class Weather extends React.Component {
     constructor(...props) {
         super(...props);
         this.state = {
-            value: 'london',
-            name: 'London',
+            value: '',
+            name: 'undefined',
+            country: 'undefined',
+            //TODO Fix run error, async setTimeout is not fixing it
+            today: 'clouds',
             list: [{
                     dt: new Date(),
                     temp: {
@@ -41,13 +45,18 @@ class Weather extends React.Component {
         event.preventDefault();
     }
 
-    _getWeather(city) {
+    _getWeather(cityQ) {
         // promise / fetch from API
-        weatherCity(city)
+        weatherCity(cityQ)
             .then(response => {
+                console.log('response: ', response)
                 this.setState({
-                    name: response.name,
+                    // changes city state with api data once loaded
+                    name: response.city.name,
+                    country: response.city.country,
+                    cityName: response.city.name,
                     list: response.list,
+                    today: response.list[0].weather[0].main,
                     loaded: true
                 })
             })
@@ -55,22 +64,34 @@ class Weather extends React.Component {
                 console.log('err: ', err);
                 this.setState({
                     err: true,
-                    errMessage: 'something went wrong'
+                    errMessage: 'something went wrong :('
                 })
             })
     }
 
-    componentWillMount(city = 'london') {
+    componentWillMount(cityQ) {
+        console.log('localStorage', localStorage)
         // returns data from state when page will load
-        return this._getWeather(city)
+        return this._getWeather(cityQ)
     }
 
     render() {
 
+        // retrieves city and title prop to be used in the component
+        const {city, country, title} = this.props
+        const cityName = this.state.name ? this.state.cityName : city
+        const countryName = this.state.country ? this.state.country : country
+
+        // dynamically renders the video
+        const today = this.state.today.toLocaleLowerCase()
+        const getWeather = showWeather(today);
+
         if (this.state.err) {
             return (
-                <div className="pure-u-1-1">
-                    <h2>{this.state.errMessage}</h2>
+                <div className="error">
+                    <div className="pure-u-1-1">
+                        <h2>{this.state.errMessage}</h2>
+                    </div>
                 </div>
             )
         }
@@ -84,22 +105,24 @@ class Weather extends React.Component {
                   {
                     item.weather.map((t, index2) =>
                       <span key={`sub-${index}-${index2}`} >
-                          <span>{ t.main }</span>
-                          <span>{ t.description }</span>
+                          <span><img src={`http://openweathermap.org/img/w/${t.icon}.png`} alt={`${t.main}`}/></span>
+                          <span style={ {...dayStyle, fontSize: '1em'} } >{ t.description }</span>
                       </span>
                     )
                   }
             </li>
         )
 
-        return(
+
+        return (
             <div className="pure-u-1-1">
+                <h1>{title}</h1>
                 <div className="l-box">
                     <form className="pure-form" onSubmit={this._handleSubmit}>
                         <label htmlFor="weather">
                             <input className="pure-input-2-3" id="weather" type="text" value={this.state.value} onChange={this._handleChange} placeholder="search a city weather..."/>
                         </label>
-                        <input className="pure-input-1-3" type="submit" value="Submit"/>
+                        <button className="button-xlarge pure-button" type="submit" value="Submit">show weather forecast</button>
                     </form>
                 </div>
                 <div className="l-box">
@@ -108,13 +131,43 @@ class Weather extends React.Component {
                             !this.state.loaded ?
                                 <div className="loader">fetching data...</div>
                                 :
-                                <div>{ list }</div>
+                                <div>
+                                    <h2>
+                                        <span>
+                                            { cityName }
+                                        </span>
+                                        <span>&nbsp;</span>
+                                        <span style={{color: 'white', fontWeight: 100, opacity: .2}}>/</span>
+                                        <span>&nbsp;</span>
+                                        <span>
+                                            { countryName }
+                                        </span>
+                                    </h2>
+                                    { list }
+                                </div>
                         }
                     </ul>
                 </div>
+
+                <video loop autoPlay muted id="video_bg" >
+                    <source src={`/assets/${getWeather}.mp4`} type="video/mp4" />
+                </video>
+
             </div>
         )
     }
+}
+
+Weather.propTypes = {
+    city: React.PropTypes.string.isRequired,
+    country: React.PropTypes.string,
+    title: React.PropTypes.string
+}
+
+Weather.defaultProps = {
+    city: 'undefined',
+    country: 'undefined',
+    title: 'weather app'
 }
 
 export default Weather;

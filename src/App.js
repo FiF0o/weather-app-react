@@ -7,10 +7,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
           {/*<img src={logo} className="App-logo" alt="logo" />*/}
           <div className="pure-g">
-            <Weather/>
+            <Weather city="london" country="GB" title="weather app" />
           </div>
+
       </div>
     );
   }
