@@ -11,6 +11,8 @@ export const showWeather = (today) => {
             return 'clear'
         case 'snow':
             return 'snow'
+        default:
+            return 'default'
     }
 };
 

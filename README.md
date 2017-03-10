@@ -1,5 +1,7 @@
 This project uses [https://openweathermap.org/api](https://openweathermap.org/api) to enable the user search for  the next 5 days weather forecast for any cities.
-The code is executed on client side and you will need to provide your own <API_KEY> from openweathermap if you wish to extend the project.
+The code is executed on client side and you will need to provide your own <API_KEY> from openweathermap if you wish to extend the project.</br></br>
+
+React weather app (client-side) is deployed with surge: [react-weather-app](http://www.react-weather-app.surge.sh)</br></br>
 
 ### Getting your API Token
 - Register to openweathermap wesbite and the token for <b>16 day / daily forecast</b>

@@ -1,10 +1,10 @@
 /**
  * Created by jonlazarini on 25/02/17.
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { weatherCity } from '../api/weather';
 import { getDayFromUnixTimeStamp } from '../utils'
-import { dayStyle, cityStyle, countryStyle, showWeather} from '../styles/style'
+import { dayStyle, showWeather} from '../styles/style'
 
 class Weather extends React.Component {
     constructor(...props) {
@@ -165,8 +165,8 @@ Weather.propTypes = {
 }
 
 Weather.defaultProps = {
-    city: 'undefined',
-    country: 'undefined',
+    city: 'london',
+    country: 'GB',
     title: 'weather app'
 }
 
