@@ -14,7 +14,7 @@ class Weather extends React.Component {
             name: 'undefined',
             country: 'undefined',
             //TODO Fix run error, async setTimeout is not fixing it
-            today: 'clouds',
+            today: 'undefined',
             list: [{
                     dt: new Date(),
                     temp: {
@@ -49,7 +49,7 @@ class Weather extends React.Component {
         // promise / fetch from API
         weatherCity(cityQ)
             .then(response => {
-                console.log('response: ', response)
+                console.log('fetched: ', response)
                 this.setState({
                     // changes city state with api data once loaded
                     name: response.city.name,
@@ -76,6 +76,13 @@ class Weather extends React.Component {
     }
 
     render() {
+        // renders element below unless data is loaded
+        if (! this.state.loaded) return (
+            <div>
+                <h1>VA T'ACHETER UN RESEAU. :'(</h1>
+                <h2>AU MOINS 3G TSE!</h2>
+            </div>
+        )
 
         // retrieves city and title prop to be used in the component
         const {city, country, title} = this.props
@@ -83,7 +90,7 @@ class Weather extends React.Component {
         const countryName = this.state.country ? this.state.country : country
 
         // dynamically renders the video
-        const today = this.state.today.toLocaleLowerCase()
+        const today = this.state.today.toLowerCase()
         const getWeather = showWeather(today);
 
         if (this.state.err) {
