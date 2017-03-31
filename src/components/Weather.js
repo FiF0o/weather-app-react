@@ -11,10 +11,9 @@ class Weather extends React.Component {
         super(...props);
         this.state = {
             value: '',
-            name: 'undefined',
-            country: 'undefined',
-            //TODO Fix run error, async setTimeout is not fixing it
-            today: 'undefined',
+            name: this.props.city,
+            country: '',
+            today: '',
             list: [{
                     dt: new Date(),
                     temp: {
@@ -45,9 +44,9 @@ class Weather extends React.Component {
         event.preventDefault();
     }
 
-    _getWeather(cityQ) {
+    _getWeather(city) {
         // promise / fetch from API
-        weatherCity(cityQ)
+        return weatherCity(city)
             .then(response => {
                 console.log('fetched: ', response)
                 this.setState({
@@ -69,10 +68,10 @@ class Weather extends React.Component {
             })
     }
 
-    componentWillMount(cityQ) {
-        console.log('localStorage', localStorage)
+    componentWillMount() {
+        console.log('app state - localStorage:', localStorage)
         // returns data from state when page will load
-        return this._getWeather(cityQ)
+        this._getWeather(this.state.name)
     }
 
     render() {
@@ -86,12 +85,11 @@ class Weather extends React.Component {
 
         // retrieves city and title prop to be used in the component
         const {city, country, title} = this.props
-        const cityName = this.state.name ? this.state.cityName : city
+        const cityName = this.state.name ? this.state.name : city
         const countryName = this.state.country ? this.state.country : country
 
         // dynamically renders the video
-        const today = this.state.today.toLowerCase()
-        const getWeather = showWeather(today);
+        const getWeather = showWeather(this.state.today.toLowerCase());
 
         if (this.state.err) {
             return (
