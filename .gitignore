@@ -21,4 +21,5 @@ src/config
 *.map
 
 bower_components
+.history
 
