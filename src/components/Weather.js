@@ -154,6 +154,7 @@ class Weather extends React.Component {
                     </ul>
                 </div>
 
+
                 <video loop autoPlay muted id="video_bg" >
                     <source src={`/assets/${getWeather}.mp4`} type="video/mp4" />
                 </video>

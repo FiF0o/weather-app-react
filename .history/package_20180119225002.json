@@ -16,7 +16,7 @@
     "redux-thunk": "2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "API_KEY=672aa588c2a9ed1c903cd291e545dcac react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -26,6 +26,6 @@
     "//": "now secret add api_key <API_KEY>",
     "now-build": "npm run build",
     "now-start": "npm run start",
-    "deploy": "./node_modules/.bin/now -e REACT_APP_API_KEY=@apikeyweather"
+    "deploy": "./node_modules/.bin/now -e API_KEY=@api_key_weather"
   }
 }

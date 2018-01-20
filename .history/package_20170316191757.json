@@ -26,6 +26,6 @@
     "//": "now secret add api_key <API_KEY>",
     "now-build": "npm run build",
     "now-start": "npm run start",
-    "deploy": "./node_modules/.bin/now -e REACT_APP_API_KEY=@apikeyweather"
+    "deploy": "./node_modules/.bin/now -e API_KEY=@api_key_weather"
   }
 }

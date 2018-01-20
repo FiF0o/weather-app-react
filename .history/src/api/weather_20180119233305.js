@@ -18,7 +18,7 @@ const getWeather = (city, type) => {
      * add var API_KEY = '<YOUR_API_KEY>' when deploying
      *
      * **/
-    let queryUrl =  `${url}${type}?q=${city}&units=${units}&cnt=${cnt}&APPID=${process.env.REACT_APP_API_KEY}`;
+    let queryUrl =  `${url}${type}?q=${city}&units=${units}&cnt=${cnt}&APPID=${process.env.API_KEY}`;
     return fetch(queryUrl)
         .then( response => {
             if (! response.ok ) { throw response }
